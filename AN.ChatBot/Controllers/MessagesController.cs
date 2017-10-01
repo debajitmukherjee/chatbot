@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
+using AN.ChatBot.Dialogs;
 
 namespace AN.ChatBot
 {
@@ -18,7 +19,7 @@ namespace AN.ChatBot
         {
             if (activity.Type == ActivityTypes.Message)
             {
-                await Conversation.SendAsync(activity, () => new Dialogs.RootDialog());
+                await Conversation.SendAsync(activity, () => new LUISDialog());
             }
             else
             {
@@ -28,6 +29,7 @@ namespace AN.ChatBot
             return response;
         }
 
+       
         private Activity HandleSystemMessage(Activity message)
         {
             if (message.Type == ActivityTypes.DeleteUserData)

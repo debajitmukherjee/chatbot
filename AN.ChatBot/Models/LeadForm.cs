@@ -1,7 +1,6 @@
 ﻿using AN.ChatBot.Common;
 using Microsoft.Bot.Builder.FormFlow;
 using System;
-using System.Text.RegularExpressions;
 using Microsoft.Bot.Builder.Dialogs;
 using System.Threading.Tasks;
 
@@ -22,9 +21,10 @@ namespace AN.ChatBot.Models
             return new FormBuilder<LeadForm>().Message(BotConstants.MESSAGE_LEAD_FORM)
                     .Field(nameof(FirstName))
                     .Field(nameof(LastName))
-                    .Field(nameof(Email), IsValidEmail)
-                    .Field(nameof(PhoneNo), IsValidPhoneNo)
+                    .Field(nameof(Email))
+                    .Field(nameof(PhoneNo))
                     .Field(nameof(PrefferedContactOption))
+                    .Confirm(BotConstants.CONFIRM_LEAD_FORM)
                     .OnCompletion(LeadFormSubmitted)
                     .Message("Thank you, I have submitted your message.")
                     .Build();
@@ -35,17 +35,6 @@ namespace AN.ChatBot.Models
             throw new NotImplementedException();
         }
 
-        private static bool IsValidPhoneNo(LeadForm state)
-        {
-            return true;
-        }
-
-        private static bool IsValidEmail(LeadForm state)
-        {
-            bool isEmail = Regex.IsMatch(state.Email, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase);
-            return isEmail;
-        }
-
         [Prompt(BotConstants.PROMPT_FIRST_NAME)]
         public string FirstName;
 
@@ -53,6 +42,7 @@ namespace AN.ChatBot.Models
         public string LastName;
 
         [Prompt(BotConstants.PROMPT_EMAIL)]
+        [Pattern(BotConstants.REGX_EMAIL)]
         public string Email;
 
         [Prompt(BotConstants.PROMPT_PHONE_NO)]

@@ -1,10 +1,10 @@
 ﻿using AN.ChatBot.Common;
+using AN.ChatBot.Models;
 using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Builder.FormFlow;
 using Microsoft.Bot.Builder.Luis;
 using Microsoft.Bot.Builder.Luis.Models;
-using Microsoft.Bot.Connector;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace AN.ChatBot.Dialogs
@@ -13,6 +13,15 @@ namespace AN.ChatBot.Dialogs
     [Serializable]
     public class LUISDialog : LuisDialog<object>
     {
+        private readonly BuildFormDelegate<LeadForm> SubmitLeadForm;
+        private readonly BuildFormDelegate<UserActivityType> SubmitActivityType;
+
+        public LUISDialog(BuildFormDelegate<LeadForm> submitLeadForm, BuildFormDelegate<UserActivityType> submitActivityType)
+        {
+            SubmitLeadForm = submitLeadForm;
+            SubmitActivityType = submitActivityType;
+        }
+        
 
         [LuisIntent(BotConstants.INTENT_NONE)]
         public async Task None(IDialogContext context, LuisResult result)
@@ -24,26 +33,12 @@ namespace AN.ChatBot.Dialogs
         [LuisIntent(BotConstants.INTENT_GREET_WELCOME)]
         public async Task GreetWelcome(IDialogContext context, LuisResult result)
         {
-            var reply = context.MakeMessage();
-            reply.Attachments = new List<Attachment>();
-
-            var actions = new List<CardAction>();
-            actions.Add(new CardAction { Type = ActionTypes.ImBack, Title = BotConstants.BUTTON_BUY, Text = BotConstants.BUTTON_BUY });
-            actions.Add(new CardAction { Type = ActionTypes.ImBack, Title = BotConstants.BUTTON_SELL, Text = BotConstants.BUTTON_SELL });
-
-            reply.Attachments.Add(
-                new HeroCard
-                {
-                    Title = BotConstants.DIALOG_GREET_HELP,
-                    //Subtitle = BotConstants.DIALOG_GREET_HELP,
-                    Buttons = actions
-                }.ToAttachment()
-            );
             await context.PostAsync(BotConstants.DIALOG_GREET_WELCOME);
-            await context.PostAsync(reply);
-            context.Wait(MessageReceived);
+            var userActivityType = new FormDialog<UserActivityType>(new UserActivityType(), this.SubmitActivityType, FormOptions.PromptInStart);
+            context.Call<UserActivityType>(userActivityType, Callback);
         }
 
+        
         [LuisIntent(BotConstants.INTENT_GREET_FAREWELL)]
         public async Task GreetFarewell(IDialogContext context, LuisResult result)
         {
@@ -58,6 +53,17 @@ namespace AN.ChatBot.Dialogs
             context.Wait(MessageReceived);
         }
 
+        [LuisIntent(BotConstants.INTENT_GET_LOWER_PRICE)]
+        public async Task GetLowerPrice(IDialogContext context, LuisResult result)
+        {
+            var leadForm = new FormDialog<LeadForm>(new LeadForm(), this.SubmitLeadForm, FormOptions.PromptInStart);
+            context.Call<LeadForm>(leadForm, Callback);
+        }
 
+        private async Task Callback(IDialogContext context, IAwaitable<object> result)
+        {
+            context.Wait(MessageReceived);
+        }
+        
     }
 }

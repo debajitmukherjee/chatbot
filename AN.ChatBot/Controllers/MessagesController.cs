@@ -5,6 +5,7 @@ using System.Web.Http;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 using AN.ChatBot.Dialogs;
+using AN.ChatBot.Models;
 
 namespace AN.ChatBot
 {
@@ -19,7 +20,7 @@ namespace AN.ChatBot
         {
             if (activity.Type == ActivityTypes.Message)
             {
-                await Conversation.SendAsync(activity, () => new LUISDialog());
+                await Conversation.SendAsync(activity, () => new LUISDialog(LeadForm.BuildForm, UserActivityType.BuildForm));
             }
             else
             {
@@ -30,7 +31,7 @@ namespace AN.ChatBot
         }
 
        
-        private Activity HandleSystemMessage(Activity message)
+        private void HandleSystemMessage(Activity message)
         {
             if (message.Type == ActivityTypes.DeleteUserData)
             {
@@ -56,7 +57,7 @@ namespace AN.ChatBot
             {
             }
 
-            return null;
+            
         }
     }
 }

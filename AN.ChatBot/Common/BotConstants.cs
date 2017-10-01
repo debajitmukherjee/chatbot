@@ -13,6 +13,8 @@ namespace AN.ChatBot.Common
 
         public const string INTENT_SEARCH_CAR = "Search.Car";
 
+        public const string INTENT_GET_LOWER_PRICE = "Get.LowerPrice";
+
         public const string LUIS_APP_ID = "ab95bd01-4b89-4b22-a975-40951655ee90";
 
         public const string LUIS_APP_KEY = "aa4b670e0a9d48b1ab4d286afcc3f254";
@@ -21,7 +23,7 @@ namespace AN.ChatBot.Common
 
         public const string DIALOG_GREET_WELCOME = "Hello! This is Auton, the AutoNation's assistant bot for buying and selling cars.";
 
-        public const string DIALOG_GREET_HELP = "How can I help?";
+        public const string DIALOG_GREET_HELP = "How can I help? {||}";
 
         public const string DIALOG_GREET_FAREWELL = "Ok. See you next time! Goodbye!";
 
@@ -30,6 +32,8 @@ namespace AN.ChatBot.Common
         public const string BUTTON_SELL = "SELL";
 
         public const string MESSAGE_LEAD_FORM = "Please provide your personal details.";
+
+        public const string MESSAGE_ACTIVITY_TYPE = "Thank you, let me find some cars near you.";
 
         public const string PROMPT_FIRST_NAME = "What is your first name?";
 
@@ -42,6 +46,14 @@ namespace AN.ChatBot.Common
         public const string PROMPT_CONTACT_OPTION_1 = "What is the best way to get in touch with you? {||}";
 
         public const string PROMPT_CONTACT_OPTION_2 = "How would you like us to contact you? {||}";
+
+        public const string PROMPT_ZIP_CODE = "What is your zip code?";
+
+        public const string CONFIRM_LEAD_FORM = "Is this information correct?\n{*}";
+
+        public const string REGX_EMAIL = @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z";
+
+        public const string REGX_ZIP_CODE = @"^\d{5}(?:[-\s]\d{4})?$";
 
     }
 }

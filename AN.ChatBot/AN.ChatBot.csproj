@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AN.ChatBot</RootNamespace>
     <AssemblyName>Bot Application</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -44,11 +44,91 @@
     <CodeAnalysisRuleSet>Ruleset\AN.ChatBot.Rules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AN.SC.API, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\AN.SC.API.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AN.SC.BLL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\AN.SC.BLL.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AN.SC.Business, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\AN.SC.Business.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AN.SC.Commons, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\AN.SC.Commons.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AN.SC.DAL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\AN.SC.DAL.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AN.SC.MaxMind.GeoIP2.CustomLookupProvider, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\AN.SC.MaxMind.GeoIP2.CustomLookupProvider.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>$(SolutionDir)\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="AutoNation.Commons, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\AutoNation.Commons.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoNation.DSF.Datacontracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\AutoNation.DSF.Datacontracts.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoNation.DSF.Integration.Commons, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\AutoNation.DSF.Integration.Commons.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoNation.DSF.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\AutoNation.DSF.Interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoNation.DSF.Shared, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\AutoNation.DSF.Shared.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoNation.DSF.Shared.Proxy, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\AutoNation.DSF.Shared.Proxy.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoNation.Web.ApiController, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\AutoNation.Web.ApiController.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoNation.Web.Business, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\AutoNation.Web.Business.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoNation.Web.Models, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\AutoNation.Web.Models.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoNation.Web.Mvc, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\AutoNation.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoNation.WebContentManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\AutoNation.WebContentManager.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AWSSDK, Version=1.5.2.0, Culture=neutral, PublicKeyToken=cd2d24cd2bace800, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\AWSSDK.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Chronic, Version=0.3.2.0, Culture=neutral, PublicKeyToken=3bd1f1ef638b0d3c, processorArchitecture=MSIL">
       <HintPath>$(SolutionDir)\packages\Chronic.Signed.0.3.2\lib\net40\Chronic.dll</HintPath>
+    </Reference>
+    <Reference Include="Compass.Services.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\Compass.Services.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.4.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Bot.Builder, Version=3.9.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bot.Builder.3.9.1.0\lib\net46\Microsoft.Bot.Builder.dll</HintPath>
@@ -72,8 +152,69 @@
     <Reference Include="Microsoft.WindowsAzure.Configuration, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>$(SolutionDir)\packages\Microsoft.WindowsAzure.ConfigurationManager.3.1.0\lib\net40\Microsoft.WindowsAzure.Configuration.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>$(SolutionDir)\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.Analytics, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\Sitecore.Analytics.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.Analytics.Core, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\Sitecore.Analytics.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.Analytics.Model, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\Sitecore.Analytics.Model.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.Buckets, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\Sitecore.Buckets.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.ContentSearch, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\Sitecore.ContentSearch.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.ContentSearch.Linq, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\Sitecore.ContentSearch.Linq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.ExperienceEditor, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\Sitecore.ExperienceEditor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.ExperienceEditor.Speak, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\Sitecore.ExperienceEditor.Speak.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.ExperienceEditor.Speak.Ribbon, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\Sitecore.ExperienceEditor.Speak.Ribbon.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.Kernel, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\Sitecore.Kernel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.Logging, Version=1.2.0.30715, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\Sitecore.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.Mvc, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\Sitecore.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.Update, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\Sitecore.Update.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sitecore.Zip, Version=8.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\Sitecore.Zip.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=4.0.40306.1554, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -92,9 +233,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>$(SolutionDir)\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
@@ -106,6 +247,10 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="WCFExtrasPlus, Version=2.4.0.6, Culture=neutral, PublicKeyToken=f8633fc5451b43fc, processorArchitecture=MSIL">
+      <HintPath>..\packages\DT.AN.Foundation.17.10.6.2\lib\net461\WCFExtrasPlus.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="default.htm" />
@@ -123,6 +268,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\CardHelper.cs" />
+    <Compile Include="Helper\HttpRequestHelper.cs" />
+    <Compile Include="Helper\SearchHelper.cs" />
     <Compile Include="Models\Car.cs" />
     <Compile Include="Models\LeadForm.cs" />
     <Compile Include="Models\UserActivityType.cs" />
@@ -133,6 +281,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Ruleset\AN.ChatBot.Rules.ruleset" />
+    <Content Include="App_Config\Include\VehicleDetails.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -140,7 +289,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

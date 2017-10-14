@@ -55,5 +55,41 @@ namespace AN.ChatBot.Common
 
         public const string REGX_ZIP_CODE = @"^\d{5}(?:[-\s]\d{4})?$";
 
+        public const string BUTTON_GET_LOWER_PRICE = "Get Lower Price";
+
+        public const string LABEL_VIN = "VIN: ";
+
+        public const string LABEL_MSRP = "MSRP: ";
+
+        public const string LABEL_MSRP_WITH_ACCESSORIES = "MSRP WITH ACCESSORIES: ";
+
+        public const string LABEL_AUTONATION_PRICE = "AUTONATION PRICE: ";
+
+        public const string IMAGE_PROTOCOL = "https:";
+
+        public const string USER_DATA_POST_CODE = "PostCode";
+
+        public const string USER_DATA_MAKE = "Make";
+
+        public const string USER_DATA_MODEL = "Model";
+
+        public const string USER_DATA_COLOR = "Color";
+
+        public const string USER_DATA_ACTIVITY_TYPE = "ActivityType";
+
+        public const string LUIS_ENTITY_MAKE = "Car.Make";
+
+        public const string LUIS_ENTITY_MODEL = "Car.Model";
+
+        public const string LUIS_ENTITY_COLOR = "Car.Color";
+
+        public const string LUIS_ENTITY_YEAR = "Car.Year";
+
+        public const string LUIS_ENTITY_PRICE_ABOVE = "Car.Price.Above";
+
+        public const string LUIS_ENTITY_PRICE_UNDER = "Car.Price.Under";
+
+        public const string LUIS_ENTITY_NUMBER = "builtin.number";
+
     }
 }

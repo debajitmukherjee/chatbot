@@ -8,8 +8,9 @@ namespace AN.ChatBot.Models
 {
     public enum ActivityType
     {
-        BUY,
-        SELL
+        SHOP,
+        SELL,
+        SERVICE
     }
 
     [Serializable]
@@ -27,7 +28,11 @@ namespace AN.ChatBot.Models
 
         private static Task ActivityTypeSubmitted(IDialogContext context, UserActivityType state)
         {
-            throw new NotImplementedException();
+            //Save user data
+            context.UserData.SetValue(BotConstants.USER_DATA_ACTIVITY_TYPE, state.PrefferedActivity.ToString());
+            context.UserData.SetValue(BotConstants.USER_DATA_POST_CODE, state.ZipCode);
+
+            return null;
         }
 
         [Template(TemplateUsage.EnumSelectOne, BotConstants.DIALOG_GREET_HELP)]

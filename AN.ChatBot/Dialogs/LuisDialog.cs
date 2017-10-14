@@ -1,4 +1,5 @@
 ﻿using AN.ChatBot.Common;
+using AN.ChatBot.Helper;
 using AN.ChatBot.Models;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.FormFlow;
@@ -50,14 +51,17 @@ namespace AN.ChatBot.Dialogs
         [LuisIntent(BotConstants.INTENT_SEARCH_CAR)]
         public async Task SearchCar(IDialogContext context, LuisResult result)
         {
+            var postCode = string.Empty;
+            context.UserData.TryGetValue(BotConstants.USER_DATA_POST_CODE, out postCode);
+            var filter = SearchHelper.GetSearchFilter(result, postCode);
+
             var reply = context.MakeMessage();
 
             reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
-            reply.Attachments = Car.GetCardsAttachments();
+            reply.Attachments = SearchHelper.GetCardsAttachments(filter);
 
             await context.PostAsync(reply);
             
-            //await context.PostAsync("Here is the list of cars.");
             context.Wait(MessageReceived);
         }
 
@@ -75,13 +79,16 @@ namespace AN.ChatBot.Dialogs
 
         private async Task CallbackActivity(IDialogContext context, IAwaitable<object> result)
         {
-            var reply = context.MakeMessage();
+            var postCode = string.Empty;
+            context.UserData.TryGetValue(BotConstants.USER_DATA_POST_CODE, out postCode);
+            var filter = SearchHelper.GetSearchFilter(null, postCode);
 
+            //Call search
+            var reply = context.MakeMessage();
             reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
-            reply.Attachments = Car.GetCardsAttachments();
+            reply.Attachments = SearchHelper.GetCardsAttachments(filter);
 
             await context.PostAsync(reply);
-
             
             context.Wait(MessageReceived);
         }

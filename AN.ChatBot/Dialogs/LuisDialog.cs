@@ -13,12 +13,12 @@ namespace AN.ChatBot.Dialogs
 {
     [LuisModel(BotConstants.LUIS_APP_ID, BotConstants.LUIS_APP_KEY)]
     [Serializable]
-    public class LUISDialog : LuisDialog<object>
+    public class AutoNationLuisDialog : LuisDialog<object>
     {
         private readonly BuildFormDelegate<LeadForm> SubmitLeadForm;
         private readonly BuildFormDelegate<UserActivityType> SubmitActivityType;
 
-        public LUISDialog(BuildFormDelegate<LeadForm> submitLeadForm, BuildFormDelegate<UserActivityType> submitActivityType)
+        public AutoNationLuisDialog(BuildFormDelegate<LeadForm> submitLeadForm, BuildFormDelegate<UserActivityType> submitActivityType)
         {
             SubmitLeadForm = submitLeadForm;
             SubmitActivityType = submitActivityType;
@@ -54,11 +54,12 @@ namespace AN.ChatBot.Dialogs
             var postCode = string.Empty;
             context.UserData.TryGetValue(BotConstants.USER_DATA_POST_CODE, out postCode);
             var filter = SearchHelper.GetSearchFilter(result, postCode);
+            bool isKnownUser = SearchHelper.IsKnownUser(context);
 
             var reply = context.MakeMessage();
 
             reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
-            reply.Attachments = SearchHelper.GetCardsAttachments(filter);
+            reply.Attachments = SearchHelper.GetCardsAttachments(filter, isKnownUser);
 
             await context.PostAsync(reply);
             
@@ -72,26 +73,29 @@ namespace AN.ChatBot.Dialogs
             context.Call(leadForm, Callback);
         }
 
-        private async Task Callback(IDialogContext context, IAwaitable<object> result)
-        {
-            context.Wait(MessageReceived);
-        }
-
+       
         private async Task CallbackActivity(IDialogContext context, IAwaitable<object> result)
         {
             var postCode = string.Empty;
             context.UserData.TryGetValue(BotConstants.USER_DATA_POST_CODE, out postCode);
             var filter = SearchHelper.GetSearchFilter(null, postCode);
+            bool isKnownUser = SearchHelper.IsKnownUser(context);
 
             //Call search
             var reply = context.MakeMessage();
             reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
-            reply.Attachments = SearchHelper.GetCardsAttachments(filter);
+            reply.Attachments = SearchHelper.GetCardsAttachments(filter, isKnownUser);
 
             await context.PostAsync(reply);
             
             context.Wait(MessageReceived);
         }
+
+        private async Task Callback(IDialogContext context, IAwaitable<object> result)
+        {
+            context.Wait(MessageReceived);
+        }
+
 
     }
 }

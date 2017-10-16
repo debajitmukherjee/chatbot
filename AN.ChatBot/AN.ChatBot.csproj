@@ -261,6 +261,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Common\AnConstants.cs" />
     <Compile Include="Common\BotConstants.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Dialogs\LUISDialog.cs" />
@@ -272,6 +273,7 @@
     <Compile Include="Helper\HttpRequestHelper.cs" />
     <Compile Include="Helper\SearchHelper.cs" />
     <Compile Include="Models\Car.cs" />
+    <Compile Include="Models\KeyValuePair.cs" />
     <Compile Include="Models\LeadForm.cs" />
     <Compile Include="Models\UserActivityType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

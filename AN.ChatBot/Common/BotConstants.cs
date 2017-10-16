@@ -1,6 +1,4 @@
 ﻿
-
-
 namespace AN.ChatBot.Common
 {
     public static class BotConstants
@@ -31,6 +29,12 @@ namespace AN.ChatBot.Common
 
         public const string BUTTON_SELL = "SELL";
 
+        public const string BUTTON_GET_LOWER_PRICE = "GET LOWER PRICE";
+
+        public const string BUTTON_CONTACT_STORE = "CONTACT STORE";
+
+        public const string BUTTON_VIEW_CAR = "VIEW CAR DETAILS";
+
         public const string MESSAGE_LEAD_FORM = "Please provide your personal details.";
 
         public const string MESSAGE_ACTIVITY_TYPE = "Thank you, let me find some cars near you.";
@@ -55,15 +59,25 @@ namespace AN.ChatBot.Common
 
         public const string REGX_ZIP_CODE = @"^\d{5}(?:[-\s]\d{4})?$";
 
-        public const string BUTTON_GET_LOWER_PRICE = "Get Lower Price";
+        public const string LABEL_VIN = "VIN:";
 
-        public const string LABEL_VIN = "VIN: ";
+        public const string LABEL_MSRP = "MSRP:";
 
-        public const string LABEL_MSRP = "MSRP: ";
+        public const string LABEL_MSRP_WITH_ACCESSORIES = "MSRP WITH ACCESSORIES:";
 
-        public const string LABEL_MSRP_WITH_ACCESSORIES = "MSRP WITH ACCESSORIES: ";
+        public const string LABEL_AUTONATION_PRICE = "AUTONATION PRICE:";
 
-        public const string LABEL_AUTONATION_PRICE = "AUTONATION PRICE: ";
+        public const string LABEL_CALL_FOR_PRICE = "CALL FOR PRICE";
+
+        public const string LABEL_CONDITION = "CONDITION:";
+
+        public const string LABEL_INVENTORY_STATUS = "INVENTORY STATUS:";
+
+        public const string LABEL_SPACE = " ";
+
+        public const string LABEL_DOLLAR = "$";
+
+        public const string LABEL_NEW_LINE = "\r\r";
 
         public const string IMAGE_PROTOCOL = "https:";
 
@@ -77,6 +91,16 @@ namespace AN.ChatBot.Common
 
         public const string USER_DATA_ACTIVITY_TYPE = "ActivityType";
 
+        public const string USER_DATA_FIRST_NAME = "FirstName";
+
+        public const string USER_DATA_LAST_NAME = "LastName";
+
+        public const string USER_DATA_EMAIL = "Email";
+
+        public const string USER_DATA_PHONE = "Phone";
+
+        public const string USER_DATA_PREFERED_CONTACT_METHOD = "ContactMethod";
+
         public const string LUIS_ENTITY_MAKE = "Car.Make";
 
         public const string LUIS_ENTITY_MODEL = "Car.Model";
@@ -85,11 +109,24 @@ namespace AN.ChatBot.Common
 
         public const string LUIS_ENTITY_YEAR = "Car.Year";
 
+        public const string LUIS_ENTITY_CONDITION = "Car.Condition";
+
         public const string LUIS_ENTITY_PRICE_ABOVE = "Car.Price.Above";
 
         public const string LUIS_ENTITY_PRICE_UNDER = "Car.Price.Under";
 
         public const string LUIS_ENTITY_NUMBER = "builtin.number";
 
+        public const string ITEM_DISPLAY_MODE_LOCKED = "Locked";
+
+        public const string ITEM_DISPLAY_MODE_UNLOCKED = "Unlocked";
+
+        public const string ITEM_DISPLAY_MODE_BOTH = "Both";
+
+        public const string CURRENCY_FORMAT = "{0:n0}";
+
+       
+
+       
     }
 }

@@ -20,7 +20,7 @@ namespace AN.ChatBot
         {
             if (activity.Type == ActivityTypes.Message)
             {
-                await Conversation.SendAsync(activity, () => new LUISDialog(LeadForm.BuildForm, UserActivityType.BuildForm));
+                await Conversation.SendAsync(activity, () => new AutoNationLuisDialog(LeadForm.BuildForm, UserActivityType.BuildForm));
             }
             else
             {

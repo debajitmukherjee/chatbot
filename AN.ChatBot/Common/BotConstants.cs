@@ -37,7 +37,9 @@ namespace AN.ChatBot.Common
 
         public const string MESSAGE_LEAD_FORM = "Please provide your personal details.";
 
-        public const string MESSAGE_ACTIVITY_TYPE = "Thank you, let me find some cars near you.";
+        public const string MESSAGE_ACTIVITY_TYPE = "Thank you, let me find some cars near you.\r\r You can search cars by make, model, year, color, vehicle condition and price";
+
+        public const string MESSAGE_LEAD_SUCCESS = "Thank you for submitting the information. You have unlocked the AutoNation price for all vehicles. Our representative will contact you soon.";
 
         public const string PROMPT_FIRST_NAME = "What is your first name?";
 
@@ -72,6 +74,8 @@ namespace AN.ChatBot.Common
         public const string LABEL_CONDITION = "CONDITION:";
 
         public const string LABEL_INVENTORY_STATUS = "INVENTORY STATUS:";
+
+        public const string LABEL_MILES_AWAY = "Miles Away";
 
         public const string LABEL_SPACE = " ";
 
@@ -125,8 +129,11 @@ namespace AN.ChatBot.Common
 
         public const string CURRENCY_FORMAT = "{0:n0}";
 
-       
+        public const string MILES_FORMAT = "{0:0.##}";
 
-       
+
+
+
+
     }
 }

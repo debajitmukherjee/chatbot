@@ -26,7 +26,7 @@ namespace AN.ChatBot.Models
                     .Field(nameof(PrefferedContactOption))
                     .Confirm(BotConstants.CONFIRM_LEAD_FORM)
                     .OnCompletion(LeadFormSubmitted)
-                    .Message("Thank you, I have submitted your message.")
+                    .Message(BotConstants.MESSAGE_LEAD_SUCCESS)
                     .Build();
         }
 

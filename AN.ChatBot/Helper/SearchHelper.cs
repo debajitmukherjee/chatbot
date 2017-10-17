@@ -9,6 +9,7 @@ using System.Linq;
 using System;
 using AutoNation.DSF.Datacontracts.Vehicle;
 using Microsoft.Bot.Builder.Dialogs;
+using AutoNation.DSF.Datacontracts.Store;
 
 namespace AN.ChatBot.Helper
 {
@@ -115,6 +116,7 @@ namespace AN.ChatBot.Helper
             var response = GetSimpleSearchResult(filter);
             var cards = new List<Attachment>();
             string carDetailsUrl = ConfigurationManager.AppSettings["CarDetailsURL"];
+            var stores = response.Stores;
 
             foreach (var car in response.SearchVehicles)
             {
@@ -123,10 +125,11 @@ namespace AN.ChatBot.Helper
                 string condition = BotConstants.LABEL_CONDITION + BotConstants.LABEL_SPACE + car.Vehicle.StockType;
                 string inventoryStatus = GetCarInventoryStatus(car);
                 var cardAction = GetCardAction(car, isKnownUser);
+                var distance = GetDistance(car, stores);
 
                 cards.Add(CardHelper.GetHeroCard(
                        title: car.Name,
-                       subtitle: vin + BotConstants.LABEL_NEW_LINE + condition + BotConstants.LABEL_NEW_LINE + inventoryStatus,
+                       subtitle: vin + BotConstants.LABEL_NEW_LINE + condition + BotConstants.LABEL_NEW_LINE + inventoryStatus + BotConstants.LABEL_NEW_LINE + distance,
                        text: price,
                        cardImages: new List<CardImage> { new CardImage(url: BotConstants.IMAGE_PROTOCOL + car.ImageURL) },
                        cardActions: new List<CardAction> {
@@ -172,20 +175,23 @@ namespace AN.ChatBot.Helper
         private static string PopulatePrice(PaymentStackItemType pricingItem)
         {
             string price = string.Empty;
+            int priceValue = 0;
 
             if(AnConstants.PricingStackItems.Any(p => p.Key == pricingItem.Name.ToLowerInvariant()))
             {
                 var pricingStackItem = AnConstants.PricingStackItems.FirstOrDefault(p => p.Key == pricingItem.Name.ToLowerInvariant());
                 price = pricingStackItem.Value;
+                var pricingItemValue = pricingItem.Value;
+                priceValue = (int)Convert.ToDouble(pricingItemValue); 
             }
             else
             {
                 price = pricingItem.Name;
             }
 
-            if (Convert.ToInt32(pricingItem.Value) > 0)
+            if (priceValue > 0)
             {
-                price += BotConstants.LABEL_SPACE + BotConstants.LABEL_DOLLAR + string.Format(BotConstants.CURRENCY_FORMAT, Convert.ToInt32(pricingItem.Value));
+                price += BotConstants.LABEL_SPACE + BotConstants.LABEL_DOLLAR + string.Format(BotConstants.CURRENCY_FORMAT, priceValue);
             }
 
 
@@ -216,6 +222,19 @@ namespace AN.ChatBot.Helper
                 return new CardAction(ActionTypes.MessageBack, BotConstants.BUTTON_CONTACT_STORE, value: BotConstants.BUTTON_CONTACT_STORE);
             }
 
+        }
+
+        private static string GetDistance(SimpleSearchVehicle car, List<StoreDistanceType> stores)
+        {
+            string distance = string.Empty;
+            var store = stores.FirstOrDefault(s => s.HyperionId == car.Vehicle.HyperionId);
+            if(store != null)
+            {
+                string milesFormat = string.Format(BotConstants.MILES_FORMAT, store.Distance);
+                distance = milesFormat + BotConstants.LABEL_SPACE + BotConstants.LABEL_MILES_AWAY;
+            }
+
+            return distance;
         }
 
 

@@ -32,7 +32,7 @@ namespace AN.ChatBot.Helper
                 MinMileage = 0,
                 MaxMileage = 650000,
                 PageNo = 1,
-                PageSize = 12,
+                PageSize = 24,
                 MinPrice = 0,
                 MaxPrice = 65000,
                 Radius = -1,
@@ -215,11 +215,11 @@ namespace AN.ChatBot.Helper
         {
             if (!isKnownUser && car.UnKnownUserView.ShowGetLowerPrice)
             {
-                return new CardAction(ActionTypes.MessageBack, BotConstants.BUTTON_GET_LOWER_PRICE, value: BotConstants.BUTTON_GET_LOWER_PRICE);
+                return new CardAction(ActionTypes.ImBack, BotConstants.BUTTON_GET_LOWER_PRICE, value: BotConstants.BUTTON_GET_LOWER_PRICE);
             }
             else
             {
-                return new CardAction(ActionTypes.MessageBack, BotConstants.BUTTON_CONTACT_STORE, value: BotConstants.BUTTON_CONTACT_STORE);
+                return new CardAction(ActionTypes.ImBack, BotConstants.BUTTON_CONTACT_STORE, value: BotConstants.BUTTON_CONTACT_STORE);
             }
 
         }

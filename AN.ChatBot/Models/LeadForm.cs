@@ -32,7 +32,14 @@ namespace AN.ChatBot.Models
 
         private static Task LeadFormSubmitted(IDialogContext context, LeadForm state)
         {
-            throw new NotImplementedException();
+            //Save user data
+            context.UserData.SetValue(BotConstants.USER_DATA_FIRST_NAME, state.FirstName);
+            context.UserData.SetValue(BotConstants.USER_DATA_LAST_NAME, state.LastName);
+            context.UserData.SetValue(BotConstants.USER_DATA_EMAIL, state.Email);
+            context.UserData.SetValue(BotConstants.USER_DATA_PHONE, state.PhoneNo);
+            context.UserData.SetValue(BotConstants.USER_DATA_PREFERED_CONTACT_METHOD, state.PrefferedContactOption.ToString());
+
+            return null;
         }
 
         [Prompt(BotConstants.PROMPT_FIRST_NAME)]

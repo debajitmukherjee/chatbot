@@ -35,7 +35,20 @@ namespace AN.ChatBot.Dialogs
         [LuisIntent(BotConstants.INTENT_GREET_WELCOME)]
         public async Task GreetWelcome(IDialogContext context, LuisResult result)
         {
-            await context.PostAsync(BotConstants.DIALOG_GREET_WELCOME);
+            string welcomeMessage = BotConstants.DIALOG_GREET_WELCOME;
+            var firstName = string.Empty;
+            context.UserData.TryGetValue(BotConstants.USER_DATA_FIRST_NAME, out firstName);
+
+            if(!string.IsNullOrEmpty(firstName))
+            {
+                welcomeMessage = welcomeMessage.Replace(BotConstants.DIALOG_FIRST_NAME_TOKEN, firstName);
+            }
+            else
+            {
+                welcomeMessage = welcomeMessage.Replace(BotConstants.DIALOG_FIRST_NAME_TOKEN, "");
+            }
+
+            await context.PostAsync(welcomeMessage);
             var userActivityType = new FormDialog<UserActivityType>(new UserActivityType(), SubmitActivityType, FormOptions.PromptInStart);
             context.Call(userActivityType, CallbackActivity);
         }
@@ -61,7 +74,15 @@ namespace AN.ChatBot.Dialogs
             reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
             reply.Attachments = SearchHelper.GetCardsAttachments(filter, isKnownUser);
 
-            await context.PostAsync(reply);
+            if(reply.Attachments.Count > 0)
+            {
+                await context.PostAsync(reply);
+            }
+            else // no results found
+            {
+                await context.PostAsync(BotConstants.DIALOG_SEARCH_NO_RESULTS);
+            }
+            
             
             context.Wait(MessageReceived);
         }

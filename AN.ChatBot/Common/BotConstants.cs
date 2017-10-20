@@ -57,11 +57,15 @@ namespace AN.ChatBot.Common
 
         public const string DIALOG_NONE = "Not sure I understand what you are saying, but I am learning more every day.";
 
-        public const string DIALOG_GREET_WELCOME = "Hello! This is Auton, the AutoNation's assistant bot for buying and selling cars.";
+        public const string DIALOG_GREET_WELCOME = "Hello [FirstName]! This is Auton, the AutoNation's assistant bot for buying and selling cars.";
+
+        public const string DIALOG_FIRST_NAME_TOKEN = "[FirstName]";
 
         public const string DIALOG_GREET_HELP = "How can I help? {||}";
 
         public const string DIALOG_GREET_FAREWELL = "Ok. See you next time! Goodbye!";
+
+        public const string DIALOG_SEARCH_NO_RESULTS = "Sorry! I couldn't find anything based on your search.\r\r You can search cars by make, model, year, color, vehicle condition and price.";
 
         #region Generic Dialogs
 
@@ -113,7 +117,7 @@ namespace AN.ChatBot.Common
 
         public const string MESSAGE_LEAD_FORM = "Please provide your personal details.";
 
-        public const string MESSAGE_ACTIVITY_TYPE = "Thank you, let me find some cars near you.\r\r You can search cars by make, model, year, color, vehicle condition and price";
+        public const string MESSAGE_ACTIVITY_TYPE = "Thank you, let me find some cars near you.\r\r You can search cars by make, model, year, color, vehicle condition and price.";
 
         public const string MESSAGE_LEAD_SUCCESS = "Thank you for submitting the information. You have unlocked the AutoNation price for all vehicles. Our representative will contact you soon.";
 

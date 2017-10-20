@@ -10,11 +10,21 @@ using System;
 using AutoNation.DSF.Datacontracts.Vehicle;
 using Microsoft.Bot.Builder.Dialogs;
 using AutoNation.DSF.Datacontracts.Store;
+using AN.SC.Commons.Settings;
 
 namespace AN.ChatBot.Helper
 {
     public static class SearchHelper
     {
+
+        public static int MaxMileage { get; set; }
+
+        public static int PageSize { get; set; }
+
+        public static int MaxPrice { get; set; }
+
+        public static string SortBy { get; set; }
+
         public static SimpleSearchResponse GetSimpleSearchResult(SimpleSearchFilter filter)
         {
             var serializer = new JavaScriptSerializer();
@@ -27,16 +37,27 @@ namespace AN.ChatBot.Helper
 
         public static SimpleSearchFilter GetSearchFilter(LuisResult result, string postalCode)
         {
+
+            //Check if value exists
+            if(PageSize <= 0)
+            {
+                PageSize = AppSettingsUtility.GetInt("RecordsPerPage");
+                MaxMileage = AppSettingsUtility.GetInt("MaxMileage");
+                MaxPrice = AppSettingsUtility.GetInt("MaxPrice");
+                SortBy = AppSettingsUtility.GetString("SortBy");
+            }
+            
+
             var filter = new SimpleSearchFilter
             {
                 MinMileage = 0,
-                MaxMileage = 650000,
+                MaxMileage = MaxMileage,
                 PageNo = 1,
-                PageSize = 10,
+                PageSize = PageSize,
                 MinPrice = 0,
-                MaxPrice = 65000,
+                MaxPrice = MaxPrice,
                 Radius = -1,
-                SortBy = "distance",
+                SortBy = SortBy,
                 SortDirection = 0
 
             };
@@ -177,12 +198,12 @@ namespace AN.ChatBot.Helper
             string price = string.Empty;
             int priceValue = 0;
 
-            if(AnConstants.PricingStackItems.Any(p => p.Key == pricingItem.Name.ToLowerInvariant()))
+            if (AnConstants.PricingStackItems.Any(p => p.Key == pricingItem.Name.ToLowerInvariant()))
             {
                 var pricingStackItem = AnConstants.PricingStackItems.FirstOrDefault(p => p.Key == pricingItem.Name.ToLowerInvariant());
                 price = pricingStackItem.Value;
                 var pricingItemValue = pricingItem.Value;
-                priceValue = (int)Convert.ToDouble(pricingItemValue); 
+                priceValue = (int)Convert.ToDouble(pricingItemValue);
             }
             else
             {
@@ -228,7 +249,7 @@ namespace AN.ChatBot.Helper
         {
             string distance = string.Empty;
             var store = stores.FirstOrDefault(s => s.HyperionId == car.Vehicle.HyperionId);
-            if(store != null)
+            if (store != null)
             {
                 string milesFormat = string.Format(BotConstants.MILES_FORMAT, store.Distance);
                 distance = milesFormat + BotConstants.LABEL_SPACE + BotConstants.LABEL_MILES_AWAY;

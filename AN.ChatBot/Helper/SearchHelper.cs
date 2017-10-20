@@ -32,7 +32,7 @@ namespace AN.ChatBot.Helper
                 MinMileage = 0,
                 MaxMileage = 650000,
                 PageNo = 1,
-                PageSize = 24,
+                PageSize = 10,
                 MinPrice = 0,
                 MaxPrice = 65000,
                 Radius = -1,

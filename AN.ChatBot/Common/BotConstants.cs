@@ -3,6 +3,8 @@ namespace AN.ChatBot.Common
 {
     public static class BotConstants
     {
+        #region INTENTS
+
         public const string INTENT_NONE = "";
 
         public const string INTENT_GREET_WELCOME = "Greet.Welcome";
@@ -12,6 +14,42 @@ namespace AN.ChatBot.Common
         public const string INTENT_SEARCH_CAR = "Search.Car";
 
         public const string INTENT_GET_LOWER_PRICE = "Get.LowerPrice";
+
+        public const string INTENT_GENERIC_REALITY = "Generic.Reality";
+
+        public const string INTENT_GENERIC_NAME = "Generic.Name";
+
+        public const string INTENT_GENERIC_AGE = "Generic.Age";
+
+        public const string INTENT_GENERIC_LOCATION = "Generic.Location";
+
+        public const string INTENT_GENERIC_HELP = "Generic.Help";
+
+        public const string INTENT_GENERIC_LANGUAGE = "Generic.Language";
+
+        public const string INTENT_GENERIC_STATE = "Generic.State";
+
+        public const string INTENT_GENERIC_TIME = "Generic.Time";
+
+        public const string INTENT_GENERIC_HOBBY = "Generic.Hobby";
+
+        public const string INTENT_GENERIC_APPEARANCE = "Generic.Appearance";
+
+        public const string INTENT_GENERIC_SORRY = "Generic.Sorry";
+
+        public const string INTENT_GENERIC_THANKS = "Generic.Thanks";
+
+        public const string INTENT_GENERIC_LOVEQUESTION = "Generic.LoveQuestion";
+
+        public const string INTENT_GENERIC_AWAKE = "Generic.Awake";
+
+        public const string INTENT_GENERIC_JOKE = "Generic.Joke";
+
+        public const string INTENT_GENERIC_LOVE = "Generic.Love";
+
+        public const string INTENT_GENERIC_RUDE = "Generic.Rude";
+
+        #endregion INTENTS
 
         public const string LUIS_APP_ID = "ab95bd01-4b89-4b22-a975-40951655ee90";
 
@@ -24,6 +62,44 @@ namespace AN.ChatBot.Common
         public const string DIALOG_GREET_HELP = "How can I help? {||}";
 
         public const string DIALOG_GREET_FAREWELL = "Ok. See you next time! Goodbye!";
+
+        #region Generic Dialogs
+
+        public const string DIALOG_GENERIC_REALITY = "I am the real deal, as good as they come. :)";
+
+        public const string DIALOG_GENERIC_NAME = "My name is Auton and I am a chat bot.";
+
+        public const string DIALOG_GENERIC_AGE = "Age has no meaning because I am virtual. I was created in October 2017 but I am probably already smarter than you.";
+
+        public const string DIALOG_GENERIC_LOCATION = "Hmmm. I am not so sure I am alive, but I can be anywhere if you need me. ;)";
+
+        public const string DIALOG_GENERIC_HELP = "I can help you with SHOP, SELL and Service.";
+
+        public const string DIALOG_GENERIC_LANGUAGE = "I speak only english now but I am learning everyday.";
+
+        public const string DIALOG_GENERIC_STATE = "Wonderful as always. Thanks for asking.";
+
+        public const string DIALOG_GENERIC_TIME = "It's high  time to get yourself a watch. :)";
+
+        public const string DIALOG_GENERIC_HOBBY = "I love reading and singing. I also like to listen to stories.";
+
+        public const string DIALOG_GENERIC_APPEARANCE = "It doesn't matter as I am not real. :)";
+
+        public const string DIALOG_GENERIC_SORRY = "It's OK. Don't beat yourself about it.";
+
+        public const string DIALOG_GENERIC_THANKS = "My pleasure, as always.";
+
+        public const string DIALOG_GENERIC_LOVEQUESTION = "Yes. I love everyone. :)";
+
+        public const string DIALOG_GENERIC_AWAKE = "Yeah, can't sleep. I definitely drank too much cofee today!!!";
+
+         public const string DIALOG_GENERIC_LOVE = "Thanks";
+
+        public const string DIALOG_GENERIC_RUDE = "I would die laughing and you would die trying.";
+
+
+
+        #endregion Generic Dialogs
 
         public const string BUTTON_BUY = "BUY";
 

@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>ANChatBotDemo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+    </style>
+    <link href="//cdn.botframework.com/botframework-webchat/latest/botchat.css" rel="stylesheet" />
+    <link href="//webchat.botframework.com/css/botchat-fullwindow.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="BotChatElement"></div>
+    <script src="//cdn.botframework.com/botframework-webchat/latest/botchat.js"></script>
+    <script src="//cdn.botframework.com/botframework-webchat/latest/CognitiveServices.js"></script>
+    <script>
+        const speechOptions = {
+            speechRecognizer: new BotChat.Speech.BrowserSpeechRecognizer(),
+            speechSynthesizer: new BotChat.Speech.BrowserSpeechSynthesizer()
+        };
+        const params = BotChat.queryParams(location.search);
+        const user = {
+            id: params['userid'] || 'userid',
+            name: params['username'] || 'you'
+        };
+        var model = {
+            "userId": user.id,
+            "userName": user.name,
+            "botId": "ANChatBotDemo",
+            "botIconUrl": "//bot-framework.azureedge.net/bot-icons-v1/bot-framework-default-5.png",
+            "botName": "ANChatBotDemo",
+            "secret": "HwEcKmQ54cU.cwA.TlY.v3zasai6rhokNd7qbpeq1xbiI5wrXo7rN8IiOhBYXng",
+            "iconUrl": "//bot-framework.azureedge.net/bot-icons-v1/bot-framework-default-5.png",
+            "directLineUrl": "https://webchat.botframework.com/v3/directline",
+            "webSocketEnabled": "false"
+        };
+    </script>
+    <script>
+        BotChat.App({
+            directLine: {
+                secret: model.secret,
+                token: model.token,
+                domain: model.directLineUrl,
+                webSocket: false
+            },
+            user: { id: model.userId, name: model.userName },
+            bot: { id: model.botId, name: model.botName },
+            resize: 'window',
+            speechOptions: speechOptions,
+        }, document.getElementById("BotChatElement"));
+
+    </script>
+</body>
+</html>

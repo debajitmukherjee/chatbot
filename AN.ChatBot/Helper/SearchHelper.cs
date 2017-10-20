@@ -105,7 +105,7 @@ namespace AN.ChatBot.Helper
 
                     if (result.Entities.Any(e => e.Type == BotConstants.LUIS_ENTITY_NUMBER && e.Entity != yearNumber.ToString()))
                     {
-                        filter.MaxPrice = Convert.ToInt32(result.Entities.OrderByDescending(e => e.Entity).FirstOrDefault(e => e.Type == BotConstants.LUIS_ENTITY_NUMBER && e.Entity != yearNumber.ToString()).Entity);
+                        filter.MaxPrice = Convert.ToInt32(result.Entities.OrderByDescending(e => e.Entity).FirstOrDefault(e => e.Type == BotConstants.LUIS_ENTITY_NUMBER && e.Entity != yearNumber.ToString()).Entity.Replace(",", "").Replace(".", ""));
                     }
 
 
@@ -122,7 +122,7 @@ namespace AN.ChatBot.Helper
 
                     if (result.Entities.Any(e => e.Type == BotConstants.LUIS_ENTITY_NUMBER && e.Entity != yearNumber.ToString()))
                     {
-                        filter.MinPrice = Convert.ToInt32(result.Entities.OrderBy(e => e.Entity).FirstOrDefault(e => e.Type == BotConstants.LUIS_ENTITY_NUMBER && e.Entity != yearNumber.ToString()).Entity);
+                        filter.MinPrice = Convert.ToInt32(result.Entities.OrderBy(e => e.Entity).FirstOrDefault(e => e.Type == BotConstants.LUIS_ENTITY_NUMBER && e.Entity != yearNumber.ToString()).Entity.Replace(",", "").Replace(".", ""));
                     }
 
 

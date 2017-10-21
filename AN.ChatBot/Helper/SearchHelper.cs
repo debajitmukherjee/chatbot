@@ -25,28 +25,21 @@ namespace AN.ChatBot.Helper
 
         public static string SortBy { get; set; }
 
-        public static SimpleSearchResponse GetSimpleSearchResult(SimpleSearchFilter filter)
-        {
-            var serializer = new JavaScriptSerializer();
-            var url = ConfigurationManager.AppSettings["SearchURL"] + serializer.Serialize(filter);
-            var webRequestHelper = new HttpRequestHelper(url);
-            var responseponse = webRequestHelper.GetResponse();
-
-            return serializer.Deserialize<SimpleSearchResponse>(responseponse);
-        }
+        public static string DefaultZipCode { get; set; }
 
         public static SimpleSearchFilter GetSearchFilter(LuisResult result, string postalCode)
         {
 
             //Check if value exists
-            if(PageSize <= 0)
+            if (PageSize <= 0)
             {
                 PageSize = AppSettingsUtility.GetInt("RecordsPerPage");
                 MaxMileage = AppSettingsUtility.GetInt("MaxMileage");
                 MaxPrice = AppSettingsUtility.GetInt("MaxPrice");
                 SortBy = AppSettingsUtility.GetString("SortBy");
+                DefaultZipCode = AppSettingsUtility.GetString("DefaultZipCode");
             }
-            
+
 
             var filter = new SimpleSearchFilter
             {
@@ -58,7 +51,8 @@ namespace AN.ChatBot.Helper
                 MaxPrice = MaxPrice,
                 Radius = -1,
                 SortBy = SortBy,
-                SortDirection = 0
+                SortDirection = 0,
+                PostalCode = DefaultZipCode
 
             };
 
@@ -94,38 +88,16 @@ namespace AN.ChatBot.Helper
                     filter.Year = result.Entities.FirstOrDefault(e => e.Type == BotConstants.LUIS_ENTITY_YEAR).Entity;
                 }
 
-                if (result.Entities.Any(e => e.Type == BotConstants.LUIS_ENTITY_PRICE_UNDER) &&
-                    result.Entities.Any(e => e.Type == BotConstants.LUIS_ENTITY_NUMBER))
+                var priceOptions = GetPriceOptions(result);
+
+                if (result.Entities.Any(e => e.Type == BotConstants.LUIS_ENTITY_PRICE_UNDER) && priceOptions.Count > 0)
                 {
-                    int yearNumber = 0;
-                    if (result.Entities.Any(e => e.Type == BotConstants.LUIS_ENTITY_YEAR))
-                    {
-                        yearNumber = Convert.ToInt32(result.Entities.FirstOrDefault(e => e.Type == BotConstants.LUIS_ENTITY_YEAR).Entity);
-                    }
-
-                    if (result.Entities.Any(e => e.Type == BotConstants.LUIS_ENTITY_NUMBER && e.Entity != yearNumber.ToString()))
-                    {
-                        filter.MaxPrice = Convert.ToInt32(result.Entities.OrderByDescending(e => e.Entity).FirstOrDefault(e => e.Type == BotConstants.LUIS_ENTITY_NUMBER && e.Entity != yearNumber.ToString()).Entity.Replace(",", "").Replace(".", ""));
-                    }
-
-
+                    filter.MaxPrice = priceOptions.OrderByDescending(p => p).FirstOrDefault();
                 }
 
-                if (result.Entities.Any(e => e.Type == BotConstants.LUIS_ENTITY_PRICE_ABOVE) &&
-                    result.Entities.Any(e => e.Type == BotConstants.LUIS_ENTITY_NUMBER))
+                if (result.Entities.Any(e => e.Type == BotConstants.LUIS_ENTITY_PRICE_ABOVE) && priceOptions.Count > 0)
                 {
-                    int yearNumber = 0;
-                    if (result.Entities.Any(e => e.Type == BotConstants.LUIS_ENTITY_YEAR))
-                    {
-                        yearNumber = Convert.ToInt32(result.Entities.FirstOrDefault(e => e.Type == BotConstants.LUIS_ENTITY_YEAR).Entity);
-                    }
-
-                    if (result.Entities.Any(e => e.Type == BotConstants.LUIS_ENTITY_NUMBER && e.Entity != yearNumber.ToString()))
-                    {
-                        filter.MinPrice = Convert.ToInt32(result.Entities.OrderBy(e => e.Entity).FirstOrDefault(e => e.Type == BotConstants.LUIS_ENTITY_NUMBER && e.Entity != yearNumber.ToString()).Entity.Replace(",", "").Replace(".", ""));
-                    }
-
-
+                    filter.MinPrice = priceOptions.OrderBy(p => p).FirstOrDefault();
                 }
             }
 
@@ -170,6 +142,16 @@ namespace AN.ChatBot.Helper
             context.UserData.TryGetValue(BotConstants.USER_DATA_FIRST_NAME, out firstName);
 
             return !string.IsNullOrEmpty(firstName);
+        }
+
+        private static SimpleSearchResponse GetSimpleSearchResult(SimpleSearchFilter filter)
+        {
+            var serializer = new JavaScriptSerializer();
+            var url = ConfigurationManager.AppSettings["SearchURL"] + serializer.Serialize(filter);
+            var webRequestHelper = new HttpRequestHelper(url);
+            var responseponse = webRequestHelper.GetResponse();
+
+            return serializer.Deserialize<SimpleSearchResponse>(responseponse);
         }
 
         private static string GetCarPrice(SimpleSearchVehicle car, bool isKnownUser)
@@ -256,6 +238,32 @@ namespace AN.ChatBot.Helper
             }
 
             return distance;
+        }
+
+        private static List<int> GetPriceOptions(LuisResult result)
+        {
+            List<int> numbers = new List<int>();
+            List<EntityRecommendation> luisNumbers = new List<EntityRecommendation>();
+            if (result != null)
+            {
+                luisNumbers = result.Entities.Where(e => e.Type == BotConstants.LUIS_ENTITY_NUMBER).ToList();
+            }
+
+            if (luisNumbers.Count > 0)
+            {
+                foreach (var luisNumber in luisNumbers)
+                {
+                    int value = Convert.ToInt32(luisNumber.Entity.Replace(",", "").Replace(".", ""));
+                    if (value >= 4000)
+                    {
+                        numbers.Add(value);
+                    }
+                }
+
+            }
+
+            return numbers;
+
         }
 
 

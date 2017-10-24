@@ -90,8 +90,34 @@ namespace AN.ChatBot.Dialogs
         [LuisIntent(BotConstants.INTENT_GET_LOWER_PRICE)]
         public async Task GetLowerPrice(IDialogContext context, LuisResult result)
         {
-            var leadForm = new FormDialog<LeadForm>(new LeadForm(), SubmitLeadForm, FormOptions.PromptInStart);
-            context.Call(leadForm, Callback);
+            var leadForm = new LeadForm();
+
+            //Check if value already exists in the context or not
+            var firstName = string.Empty;
+            context.UserData.TryGetValue(BotConstants.USER_DATA_FIRST_NAME, out firstName);
+
+            if(!string.IsNullOrEmpty(firstName))
+            {
+                var lastName = string.Empty;
+                var email = string.Empty;
+                var phoneNo = string.Empty;
+                var prefrredContactMethod = string.Empty;
+
+                context.UserData.TryGetValue(BotConstants.USER_DATA_LAST_NAME, out lastName);
+                context.UserData.TryGetValue(BotConstants.USER_DATA_EMAIL, out email);
+                context.UserData.TryGetValue(BotConstants.USER_DATA_PHONE, out phoneNo);
+                context.UserData.TryGetValue(BotConstants.USER_DATA_PREFERED_CONTACT_METHOD, out prefrredContactMethod);
+
+                leadForm.FirstName = firstName;
+                leadForm.LastName = lastName;
+                leadForm.Email = email;
+                leadForm.PhoneNo = phoneNo;
+                leadForm.PrefferedContactOption = ContactOption.Email.ToString() == prefrredContactMethod ? ContactOption.Email : ContactOption.Mobile;
+
+            }
+
+            var leadFormDialog = new FormDialog<LeadForm>(leadForm, SubmitLeadForm, FormOptions.PromptInStart);
+            context.Call(leadFormDialog, Callback);
         }
 
         #region Generic Intents

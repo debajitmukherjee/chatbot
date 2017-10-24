@@ -137,7 +137,7 @@ namespace AN.ChatBot.Common
 
         public const string CONFIRM_LEAD_FORM = "Is this information correct?\n{*}";
 
-        public const string REGX_EMAIL = @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z";
+        public const string REGX_EMAIL = @"(?i)\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z";
 
         public const string REGX_ZIP_CODE = @"^\d{5}(?:[-\s]\d{4})?$";
 

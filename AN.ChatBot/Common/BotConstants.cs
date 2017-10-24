@@ -141,6 +141,8 @@ namespace AN.ChatBot.Common
 
         public const string REGX_ZIP_CODE = @"^\d{5}(?:[-\s]\d{4})?$";
 
+        public const string REGX_PHONE_NO = @"\(?\d{3}\)?-? *\d{3}-? *-?\d{4}";
+
         public const string LABEL_VIN = "VIN:";
 
         public const string LABEL_MSRP = "MSRP:";

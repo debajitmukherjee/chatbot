@@ -53,6 +53,7 @@ namespace AN.ChatBot.Models
         public string Email;
 
         [Prompt(BotConstants.PROMPT_PHONE_NO)]
+        [Pattern(BotConstants.REGX_PHONE_NO)]
         public string PhoneNo;
 
         [Template(TemplateUsage.EnumSelectOne, BotConstants.PROMPT_CONTACT_OPTION_1, BotConstants.PROMPT_CONTACT_OPTION_2)]
